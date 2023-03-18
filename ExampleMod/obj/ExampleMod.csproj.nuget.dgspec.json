@@ -1,0 +1,50 @@
+{
+  "format": 1,
+  "restore": {
+    "Q:\\IdleWave\\modCreation\\ExampleMod\\ExampleMod\\ExampleMod.csproj": {}
+  },
+  "projects": {
+    "Q:\\IdleWave\\modCreation\\ExampleMod\\ExampleMod\\ExampleMod.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "Q:\\IdleWave\\modCreation\\ExampleMod\\ExampleMod\\ExampleMod.csproj",
+        "projectName": "ExampleMod",
+        "projectPath": "Q:\\IdleWave\\modCreation\\ExampleMod\\ExampleMod\\ExampleMod.csproj",
+        "packagesPath": "C:\\Users\\PLEXUS\\.nuget\\packages\\",
+        "outputPath": "Q:\\IdleWave\\modCreation\\ExampleMod\\ExampleMod\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\PLEXUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net40"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net40": {
+            "targetAlias": "net4.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net40": {
+          "targetAlias": "net4.0",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
