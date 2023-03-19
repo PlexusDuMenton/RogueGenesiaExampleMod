@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Q:\\IdleWave\\modCreation\\ExampleMod\\ExampleMod\\ExampleMod.csproj",
+      "projectUniqueName": "Q:\\RogueGenesiaExampleMod\\ExampleMod\\ExampleMod.csproj",
       "projectName": "ExampleMod",
-      "projectPath": "Q:\\IdleWave\\modCreation\\ExampleMod\\ExampleMod\\ExampleMod.csproj",
+      "projectPath": "Q:\\RogueGenesiaExampleMod\\ExampleMod\\ExampleMod.csproj",
       "packagesPath": "C:\\Users\\PLEXUS\\.nuget\\packages\\",
-      "outputPath": "Q:\\IdleWave\\modCreation\\ExampleMod\\ExampleMod\\obj\\",
+      "outputPath": "Q:\\RogueGenesiaExampleMod\\ExampleMod\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

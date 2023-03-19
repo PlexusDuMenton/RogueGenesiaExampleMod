@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "duml7gxxg+GxOSCrUvFvKvKiesi1yG5rnz/op20AqYuMGQq/RENmnFgDAioh8RYyM/G5CZrj0Rwq3bYFaGpOOQ==",
+  "dgSpecHash": "lXG0uWSpJXF0LU26yR+FffPWlxcyeQ7OeD15SZFpSH8nnPlSdcRXSaAnnsEZRiX7tpGWaXaik/enCHR1F0q9yg==",
   "success": true,
-  "projectFilePath": "Q:\\IdleWave\\modCreation\\ExampleMod\\ExampleMod\\ExampleMod.csproj",
+  "projectFilePath": "Q:\\RogueGenesiaExampleMod\\ExampleMod\\ExampleMod.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

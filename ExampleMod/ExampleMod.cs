@@ -8,6 +8,7 @@ using RogueGenesia.Actors.Survival;
 using UnityEngine;
 using RogueGenesia.GameManager;
 using RogueGenesia.Sound;
+using RogueGenesia.UI;
 
 public class ExampleMod : RogueGenesiaMod
 {
@@ -27,7 +28,7 @@ public class ExampleMod : RogueGenesiaMod
     //We add content at this stage, as it happen after game registered the vanilla content, but before it initiated all the IDs
     //Adding stuff before can work but you won't be able to add requirement from vanilal content
     //Adding stuff after won't work because their ID will be conflicting with other vanilla content
-    public override void GameRegisterationStep()
+    public override void OnRegisterModdedContent()
     {
         AddCardStatExample();
 
@@ -35,11 +36,27 @@ public class ExampleMod : RogueGenesiaMod
 
         AddCustomWeaponExample();
 
+        AddExampleOption();
+
         Debug.Log("Example Card added");
     }
 
+
+    public void AddExampleOption()
+    {
+
+        LocalizationData englishLoc = new LocalizationData() { Key = "en", Value = "Example Slider" };
+        LocalizationDataList localization = new LocalizationDataList("Example Slider") { localization = new List<LocalizationData>() { englishLoc } };
+
+
+        GameOptionData scaleSlider = ModOption.MakeSliderDisplayValueOption("projectile_scale",localization, 0f, 100f, 50f, 100, true);
+        var sliderobj = ModOption.AddModOption(scaleSlider, "Accessibility Options", "Not Used yet");
+
+        
+    }
+
     //This function is called when the game is finishing loading all the mods and the vanilla content
-    public override void OnGameFinishedLoading()
+    public override void OnAllContentLoaded()
     {
         Debug.Log("Game Finished Loading Mods Step");
     }
