@@ -38,6 +38,7 @@ public class ExampleMod : RogueGenesiaMod
 
         AddExampleOption();
 
+
         Debug.Log("Example Card added");
     }
 
@@ -212,12 +213,19 @@ public class ExampleMod : RogueGenesiaMod
         cardForEvolutionPassive.cardName = "Rift";
         cardForEvolutionPassive.requiredLevel = 0;
 
+        //We remove Crossbow as it's an evolution of it
+        soulCardCreationData.CardToRemove = new string[1] { "CrossBow" };
+
         //Hard requirements meant all the requirements must be fullfilled, where normal requirement simply required one of the requirements de be fullfiled
 
         soulCardCreationData.CardHardRequirement = CardAPI.MakeCardRequirement(new ModCardRequirement[2] { cardForEvolutionWeapon, cardForEvolutionPassive }, new StatRequirement[0]);
 
         //Similarly to the custom card, we also give the constructor of the weapon's class to be instanted by the game.
         CardAPI.AddCustomWeapon("Weapon_Example", typeof(ExampleWeapon).GetConstructor(Type.EmptyTypes), soulCardCreationData, true);
+
+        //Adding the custom damage source
+        ModGenesia.ModGenesia.AddCustomDamageSource("ExampleWeaponDamageSource", soulCardCreationData.NameOverride, ModGenesia.ModGenesia.LoadSprite(ModFolder + "/ExampleWeapon.png"));
+
     }
 
 
