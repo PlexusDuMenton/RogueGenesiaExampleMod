@@ -49,9 +49,11 @@ public class ExampleMod : RogueGenesiaMod
         LocalizationData englishLoc = new LocalizationData() { Key = "en", Value = "Example Slider" };
         LocalizationDataList localization = new LocalizationDataList("Example Slider") { localization = new List<LocalizationData>() { englishLoc } };
 
+        LocalizationData englishLocTooltip = new LocalizationData() { Key = "en", Value = "This does nothing" };
+        LocalizationDataList localizationTooltip = new LocalizationDataList("Example Slider") { localization = new List<LocalizationData>() { englishLocTooltip } };
 
-        GameOptionData scaleSlider = ModOption.MakeSliderDisplayValueOption("projectile_scale",localization, 0f, 100f, 50f, 100, true);
-        var sliderobj = ModOption.AddModOption(scaleSlider, "Accessibility Options", "Not Used yet");
+        GameOptionData scaleSlider = ModOption.MakeSliderDisplayValueOption("projectile_scale",localization, 0f, 100f, 50f, 100, true, localizationTooltip);
+        var sliderobj = ModOption.AddModOption(scaleSlider, "Accessibility Options", "Example Mod");
 
         
     }
