@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "lXG0uWSpJXF0LU26yR+FffPWlxcyeQ7OeD15SZFpSH8nnPlSdcRXSaAnnsEZRiX7tpGWaXaik/enCHR1F0q9yg==",
+  "dgSpecHash": "nwRo1xj2ctErqPKgfw/5FYGQiFMnvMihYVSA1uIfQCkE5Raf6mfGA0Xi+fjB8vPbc9dNibpvTNMznJEmnb0/7g==",
   "success": true,
   "projectFilePath": "Q:\\RogueGenesiaExampleMod\\ExampleMod\\ExampleMod.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\PLEXUS\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

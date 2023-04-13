@@ -12,7 +12,7 @@ using RogueGenesia.Sound;
 public class CustomCardExample : SoulCard
 {
 
-    public override void OnTakeDamage(PlayerEntity owner, IEntity damageOwner, ref float modifierDamageValue, float damageValue)
+    public override void OnTakeDamagePreDefence(PlayerEntity owner, IEntity damageOwner, ref float modifierDamageValue, float damageValue)
     {
         owner.AddBuff(new ExampleCustomCardEffectBuff(BuffIDManager.GetID("ExampleCustomBuff"), owner, owner, BuffStacking.IncreaseLevelByLevel | BuffStacking.IndepentStackDuration, 0.85f, 4+_level, 20f, 1));
     }

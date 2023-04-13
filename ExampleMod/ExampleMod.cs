@@ -226,7 +226,7 @@ public class ExampleMod : RogueGenesiaMod
         CardAPI.AddCustomWeapon("Weapon_Example", typeof(ExampleWeapon).GetConstructor(Type.EmptyTypes), soulCardCreationData, true);
 
         //Adding the custom damage source
-        ModGenesia.ModGenesia.AddCustomDamageSource("ExampleWeaponDamageSource", soulCardCreationData.NameOverride, ModGenesia.ModGenesia.LoadSprite(ModFolder + "/ExampleWeapon.png"));
+        ContentAPI.AddCustomDamageSource("ExampleWeaponDamageSource", soulCardCreationData.NameOverride, ModGenesia.ModGenesia.LoadSprite(ModFolder + "/ExampleWeapon.png"));
 
     }
 
