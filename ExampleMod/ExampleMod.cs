@@ -38,8 +38,7 @@ public class ExampleMod : RogueGenesiaMod
 
         AddExampleOption();
 
-
-        Debug.Log("Example Card added");
+        AddCustomAvatar();
     }
 
 
@@ -228,6 +227,32 @@ public class ExampleMod : RogueGenesiaMod
         //Adding the custom damage source
         ContentAPI.AddCustomDamageSource("ExampleWeaponDamageSource", soulCardCreationData.NameOverride, ModGenesia.ModGenesia.LoadSprite(ModFolder + "/ExampleWeapon.png"));
 
+    }
+
+    void AddCustomAvatar()
+    {
+        AvatarAnimations avatarAnimations = new AvatarAnimations()
+        {
+            GameOverAnimation = new PixelAnimationData() { Frames = new Vector2Int(1, 1), Texture = ModGenesia.ModGenesia.LoadPNGTexture(ModFolder + "/SerialKillerAvatar/SKA_Death.png") },
+            Icon = ModGenesia.ModGenesia.LoadSprite(ModFolder + "/SerialKillerAvatar/SKA_Icon.png"),
+            IdleAnimation = new PixelAnimationData() { Frames = new Vector2Int(9, 1), Texture = ModGenesia.ModGenesia.LoadPNGTexture(ModFolder + "/SerialKillerAvatar/SKA_Idle64.png") },
+            IdleHDAnimation = new PixelAnimationData() { Frames = new Vector2Int(10, 1), Texture = ModGenesia.ModGenesia.LoadPNGTexture(ModFolder + "/SerialKillerAvatar/SKA_Idle128.png") },
+            RunAnimation = new PixelAnimationData() { Frames = new Vector2Int(10, 1), Texture = ModGenesia.ModGenesia.LoadPNGTexture(ModFolder + "/SerialKillerAvatar/SKA_Run.png") },
+            VictoryAnimation = new PixelAnimationData() { Frames = new Vector2Int(1, 1), Texture = ModGenesia.ModGenesia.LoadPNGTexture(ModFolder + "/SerialKillerAvatar/SKA_Victory.png") }
+        };
+
+        LocalizationDataList name = new LocalizationDataList();
+
+        name.localization.Add(new LocalizationData() { Key = "en", Value = "Serial Killer" });
+
+
+
+        LocalizationDataList description = new LocalizationDataList();
+        description.localization.Add(new LocalizationData() { Key = "en", Value = "The Serial killer count his victim, for each kill you receive one charge."
+            
+            +"\nYou can press the attack button to use your charges, 10 charges are used, you trigger one attack for each of your weapon" });
+
+        AvatarAPI.AddCustomAvatar("SerialKiller", typeof(ExampleAvatarData).GetConstructor(Type.EmptyTypes), avatarAnimations, name, description, new Color(1, 0, 0), true);
     }
 
 
