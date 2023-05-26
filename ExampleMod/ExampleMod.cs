@@ -39,6 +39,8 @@ public class ExampleMod : RogueGenesiaMod
         AddExampleOption();
 
         AddCustomAvatar();
+
+        AddCustomPet();
     }
 
 
@@ -129,5 +131,33 @@ public class ExampleMod : RogueGenesiaMod
         AvatarAPI.AddCustomAvatar("SerialKiller", typeof(ExampleAvatarData).GetConstructor(Type.EmptyTypes), avatarAnimations, name, description, new Color(1, 0, 0), true);
     }
 
+
+
+    void AddCustomPet()
+    {
+        PetAnimations petAnimation = new PetAnimations()
+        {
+            Icon = ModGenesia.ModGenesia.LoadSprite(ModFolder + "/MiniRog/MiniRogIcon.png"),
+            IdleAnimation = new PixelAnimationData() { Frames = new Vector2Int(9, 1), Texture = Resources.Load<Texture2D>("Textures/Player/RogKnight/Rog_Idle64") },
+            RunAnimation = new PixelAnimationData() { Frames = new Vector2Int(10, 1), Texture = Resources.Load<Texture2D>("Textures/Player/RogKnight/Rog_Movement64") },
+        };
+
+        LocalizationDataList name = new LocalizationDataList();
+
+        name.localization.Add(new LocalizationData() { Key = "en", Value = "MiniRog" });
+
+
+
+        LocalizationDataList description = new LocalizationDataList();
+        description.localization.Add(new LocalizationData()
+        {
+            Key = "en",
+            Value = "Touch talk to me or any of my mini-rog again"
+        });
+
+        PetScriptableObject pet = PetAPI.AddCustomPet("MiniRog", typeof(ExamplePetData), petAnimation, ERequiredPetDLC.Dog);
+        pet.Unlocked = true;
+        pet.PetScale = new Vector2(1, 1);
+    }
 
 }

@@ -83,3 +83,4 @@ Q:\RogueGenesiaExampleMod\ExampleMod\bin\Debug\netstandard2.0\Unity.Timeline.dll
 Q:\RogueGenesiaExampleMod\ExampleMod\obj\Debug\netstandard2.0\ExampleMod.csproj.CopyComplete
 Q:\RogueGenesiaExampleMod\ExampleMod\obj\Debug\netstandard2.0\ExampleMod.dll
 Q:\RogueGenesiaExampleMod\ExampleMod\obj\Debug\netstandard2.0\ExampleMod.pdb
+Q:\RogueGenesiaExampleMod\ExampleMod\bin\Debug\netstandard2.0\PCGSharp.dll
