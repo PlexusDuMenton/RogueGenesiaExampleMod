@@ -117,6 +117,9 @@ public class ExampleMod : RogueGenesiaMod
             VictoryAnimation = new PixelAnimationData() { Frames = new Vector2Int(1, 1), Texture = ModGenesia.ModGenesia.LoadPNGTexture(ModFolder + "/SerialKillerAvatar/SKA_Victory.png") }
         };
 
+
+        
+
         LocalizationDataList name = new LocalizationDataList();
 
         name.localization.Add(new LocalizationData() { Key = "en", Value = "Serial Killer" });
@@ -128,7 +131,10 @@ public class ExampleMod : RogueGenesiaMod
             
             +"\nYou can press the attack button to use your charges, 10 charges are used, you trigger one attack for each of your weapon" });
 
-        AvatarAPI.AddCustomAvatar("SerialKiller", typeof(ExampleAvatarData).GetConstructor(Type.EmptyTypes), avatarAnimations, name, description, new Color(1, 0, 0), true);
+
+        AvatarSkinSO defaultAvatarSkin = AvatarAPI.AddAvatarSkin("Default_SerialKiller", avatarAnimations, "SerialKiller", name, description);
+
+        AvatarAPI.AddCustomAvatar("SerialKiller", typeof(ExampleAvatarData).GetConstructor(Type.EmptyTypes), defaultAvatarSkin, name, description, new Color(1, 0, 0), true);
     }
 
 

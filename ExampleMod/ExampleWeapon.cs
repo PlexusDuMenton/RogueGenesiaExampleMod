@@ -49,7 +49,7 @@ public class ExampleWeapon : Weapon
                 projectile.DefencePiercing = Owner.GetPlayerStats.DefencePiercing.Value;
                 DamageMultiplierData DamageMultiplier = Owner.GetDamageMultiplier;
                 projectile.DamageValue = Damage * DamageMultiplier.DamageMultiplier;
-                projectile.Critical = DamageMultiplier.Critical;
+                projectile.CriticalStack = DamageMultiplier.CriticalStack;
                 projectile.Piercing = (int)(Piercing + Owner.GetPlayerStats.ProjectilePiercing.GetValue()) + 1;
                 projectile.Speed = 25 * Owner.GetPlayerStats.ProjectileSpeed.GetValue() * (0.75f + UnityEngine.Random.value * 0.25f); ;
                 projectile.LifeTime = Owner.GetPlayerStats.ProjectileLifeTime.GetValue();
@@ -78,7 +78,7 @@ public class ExampleWeapon : Weapon
             BonusDamage = monster.CurrentHealth * (0.01f + 0.001f * _level);
         }
 
-        bool killed = entityHitted.TakeDamage(new DamageInformation(projectile.Owner, BonusDamage, 0, false, 0, new Vector2(direction.x, direction.z), DamageSource));
+        bool killed = entityHitted.TakeDamage(new DamageInformationRef(projectile.Owner, BonusDamage, 0, 0.1f,0, 0, new Vector2(direction.x, direction.z), DamageSource));
 
 
         //reduce monster health by 5% +0.5% per level

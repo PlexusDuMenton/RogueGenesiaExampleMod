@@ -152,7 +152,7 @@ public class BowAttackAndMoveBehaviour : MoveToADifferentPositionPetBehaviour
 					projectile.damageSource = "MiniRog";
 					DamageMultiplierData DamageMultiplier = pet.Player.GetDamageMultiplier;
 					projectile.DamageValue = 2 * DamageMultiplier.DamageMultiplier;
-					projectile.Critical = DamageMultiplier.Critical;
+					projectile.CriticalStack = DamageMultiplier.CriticalStack;
 					projectile.DefencePiercing = pet.Player.GetPlayerStats.DefencePiercing.Value;
 					projectile.Piercing = (int)(2 + pet.Player.GetPlayerStats.ProjectilePiercing.GetValue()) + 1;
 					projectile.Speed = 15 * pet.Player.GetPlayerStats.ProjectileSpeed.GetValue() * (0.75f + UnityEngine.Random.value * 0.25f);
@@ -466,7 +466,7 @@ public class BowAttackBehaviour : IdlePetBehaviour
 					projectile.damageSource = "MiniRog";
 					DamageMultiplierData DamageMultiplier = pet.Player.GetDamageMultiplier;
 					projectile.DamageValue = 2 * DamageMultiplier.DamageMultiplier;
-					projectile.Critical = DamageMultiplier.Critical;
+					projectile.CriticalStack = DamageMultiplier.CriticalStack;
 					projectile.DefencePiercing = pet.Player.GetPlayerStats.DefencePiercing.Value;
 					projectile.Piercing = (int)(2 + pet.Player.GetPlayerStats.ProjectilePiercing.GetValue()) + 1;
 					projectile.Speed = 15 * pet.Player.GetPlayerStats.ProjectileSpeed.GetValue() * (0.75f + UnityEngine.Random.value * 0.25f);
