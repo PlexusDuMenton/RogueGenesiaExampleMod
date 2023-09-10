@@ -53,10 +53,10 @@ public class ExampleMod : RogueGenesiaMod
         LocalizationData englishLocTooltip = new LocalizationData() { Key = "en", Value = "This does nothing" };
         LocalizationDataList localizationTooltip = new LocalizationDataList("Example Slider") { localization = new List<LocalizationData>() { englishLocTooltip } };
 
-        GameOptionData scaleSlider = ModOption.MakeSliderDisplayValueOption("projectile_scale",localization, 0f, 100f, 50f, 100, true, localizationTooltip);
+        GameOptionData scaleSlider = ModOption.MakeSliderDisplayValueOption("projectile_scale", localization, 0f, 100f, 50f, 100, true, localizationTooltip);
         var sliderobj = ModOption.AddModOption(scaleSlider, "Accessibility Options", "Example Mod");
 
-        
+
     }
 
     //This function is called when the game is finishing loading all the mods and the vanilla content
@@ -118,7 +118,7 @@ public class ExampleMod : RogueGenesiaMod
         };
 
 
-        
+
 
         LocalizationDataList name = new LocalizationDataList();
 
@@ -127,9 +127,13 @@ public class ExampleMod : RogueGenesiaMod
 
 
         LocalizationDataList description = new LocalizationDataList();
-        description.localization.Add(new LocalizationData() { Key = "en", Value = "The Serial killer count his victim, for each kill you receive one charge."
-            
-            +"\nYou can press the attack button to use your charges, 10 charges are used, you trigger one attack for each of your weapon" });
+        description.localization.Add(new LocalizationData()
+        {
+            Key = "en",
+            Value = "The Serial killer count his victim, for each kill you receive one charge."
+
+            + "\nYou can press the attack button to use your charges, 10 charges are used, you trigger one attack for each of your weapon"
+        });
 
 
         AvatarSkinSO defaultAvatarSkin = AvatarAPI.AddAvatarSkin("Default_SerialKiller", avatarAnimations, "SerialKiller", name, description);
@@ -144,8 +148,8 @@ public class ExampleMod : RogueGenesiaMod
         PetAnimations petAnimation = new PetAnimations()
         {
             Icon = ModGenesia.ModGenesia.LoadSprite(ModFolder + "/MiniRog/MiniRogIcon.png"),
-            IdleAnimation = new PixelAnimationData() { Frames = new Vector2Int(9, 1), Texture = Resources.Load<Texture2D>("Textures/Player/RogKnight/Rog_Idle64") },
-            RunAnimation = new PixelAnimationData() { Frames = new Vector2Int(10, 1), Texture = Resources.Load<Texture2D>("Textures/Player/RogKnight/Rog_Movement64") },
+            IdleAnimation = new PixelAnimationData() { Frames = new Vector2Int(9, 1), Texture = Resources.Load<Texture2D>("Textures/Player/RogKnight/Default/Rog_Idle64") },
+            RunAnimation = new PixelAnimationData() { Frames = new Vector2Int(10, 1), Texture = Resources.Load<Texture2D>("Textures/Player/RogKnight/Default/Rog_Movement64") },
         };
 
         LocalizationDataList name = new LocalizationDataList();
