@@ -1,3 +1,5 @@
 is_global = true
 build_property.RootNamespace = ExampleMod
-build_property.ProjectDir = Q:\RogueGenesiaExampleMod\ExampleMod\
+build_property.ProjectDir = C:\Users\PLEXUS\Documents\Rogue Genesia\ModSource\Example\ExampleMod\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

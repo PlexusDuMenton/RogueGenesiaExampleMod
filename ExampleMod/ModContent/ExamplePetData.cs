@@ -65,13 +65,13 @@ public class BowAttackAndMoveBehaviour : MoveToADifferentPositionPetBehaviour
 
 			if (EnemyManager.GetEnemiesCount > 0)
 			{
-				attackTimer = 5.0f * pet.Player.GetPlayerStats.AttackDelay.Value;
+				attackTimer = 5.0f * pet.Player.PlayerStats.AttackCoolDown.Value;
 
 
 
-				List<DefaultProjectilAI> projectilesList = new List<DefaultProjectilAI>();
+				List<DefaultProjectileAI> projectilesList = new List<DefaultProjectileAI>();
 
-				float projectilecount = 1 + pet.Player.GetPlayerStats.AdditionalProjectile.Value;
+				float projectilecount = 1 + pet.Player.PlayerStats.AdditionalProjectile.Value;
 
 				GameObject[] Destructibles = GameObject.FindGameObjectsWithTag("Destructible");
 
@@ -134,7 +134,7 @@ public class BowAttackAndMoveBehaviour : MoveToADifferentPositionPetBehaviour
 					if (TargetList[i] != null)
 					{
 						Vector3 ProjectileDirection = (TargetList[i].transform.position - pet.transform.position).normalized;
-						DefaultProjectilAI poolable = new DefaultProjectilAI();
+                        DefaultProjectileAI poolable = new DefaultProjectileAI();
 						poolable.PoolPrefabAssociated = _weaponProjectile;
 
 						projectilesList.Add(poolable);
@@ -146,20 +146,19 @@ public class BowAttackAndMoveBehaviour : MoveToADifferentPositionPetBehaviour
 				for (int i = 0; i < projectilesList.Count; i++)
 				{
 					GameObject projectileGO = projectilesList[i].gameObject;
-					projectileGO.transform.localScale = Vector3.one * pet.Player.GetPlayerStats.ProjectileSize.GetValue();
-					DefaultProjectilAI projectile = projectilesList[i];
+					projectileGO.transform.localScale = Vector3.one * pet.Player.PlayerStats.ProjectileSize.GetValue();
+                    DefaultProjectileAI projectile = projectilesList[i];
 					projectile.Owner = pet.Player;
 					projectile.damageSource = "MiniRog";
 					DamageMultiplierData DamageMultiplier = pet.Player.GetDamageMultiplier;
 					projectile.DamageValue = 2 * DamageMultiplier.DamageMultiplier;
 					projectile.CriticalStack = DamageMultiplier.CriticalStack;
-					projectile.DefencePiercing = pet.Player.GetPlayerStats.DefencePiercing.Value;
-					projectile.Piercing = (int)(2 + pet.Player.GetPlayerStats.ProjectilePiercing.GetValue()) + 1;
-					projectile.Speed = 15 * pet.Player.GetPlayerStats.ProjectileSpeed.GetValue() * (0.75f + UnityEngine.Random.value * 0.25f);
-					projectile.LifeTime = pet.Player.GetPlayerStats.ProjectileLifeTime.GetValue();
-					projectile.knockback = pet.Player.GetPlayerStats.KnockBack.GetValue() * 0.75f;
+					projectile.DefencePiercing = pet.Player.PlayerStats.DefencePiercing.Value;
+					projectile.Piercing = (int)(2 + pet.Player.PlayerStats.ProjectilePiercing.GetValue()) + 1;
+					projectile.Speed = 15 * pet.Player.PlayerStats.ProjectileSpeed.GetValue() * (0.75f + UnityEngine.Random.value * 0.25f);
+					projectile.LifeTime = pet.Player.PlayerStats.ProjectileLifeTime.GetValue();
+					projectile.knockback = pet.Player.PlayerStats.KnockBack.GetValue() * 0.75f;
 
-					projectile.modifierLevel = pet.Player.ClonePlayerModifier;
 					projectile.Awake();
 				}
 			}
@@ -199,7 +198,7 @@ public class BowAttackAndMoveBehaviour : MoveToADifferentPositionPetBehaviour
 	public override void OnPickBehaviour(Pet pet)
     {
 		_collectible = CollectibleManager.instance.CollectibleList["SoulGem"][UnityEngine.Random.Range(0, CollectibleManager.instance.CollectibleList["SoulGem"].Count - 1)];
-		_movespeed = pet.Player.GetPlayerStats.MoveSpeed.Value * 1.25f;
+		_movespeed = pet.Player.PlayerStats.MoveSpeed.Value * 1.25f;
 
 	}
 
@@ -221,11 +220,12 @@ public class BowAttackAndMoveBehaviour : MoveToADifferentPositionPetBehaviour
 
 		if (_collectible == null)
         {
-			return;
+			
 			PixelAnimationData idleAnimation = GameData.SelectedPet.petAnimations.IdleAnimation;
 			pet.Sprite.GetComponent<Renderer>().material.SetTexture("SpriteSheet", idleAnimation.Texture);
 			pet.Sprite.GetComponent<Renderer>().material.SetVector("SpriteSheetSize", idleAnimation.FrameCount);
 			pet.Sprite.GetComponent<Renderer>().material.SetVector("SpriteSheetAnimation", idleAnimation.FrameCount);
+			return;
 		}
 			
 
@@ -240,7 +240,7 @@ public class BowAttackAndMoveBehaviour : MoveToADifferentPositionPetBehaviour
 
 		if (distance < 1)
         {
-			_collectible.VoidBonus = true;
+			_collectible.Attracted = true;
 			_collectedGem = true;
 
 			PixelAnimationData idleAnimation = GameData.SelectedPet.petAnimations.IdleAnimation;
@@ -379,13 +379,13 @@ public class BowAttackBehaviour : IdlePetBehaviour
 
 			if (EnemyManager.GetEnemiesCount > 0)
 			{
-				attackTimer = 2.0f * pet.Player.GetPlayerStats.AttackDelay.Value;
+				attackTimer = 2.0f * pet.Player.PlayerStats.AttackCoolDown.Value;
 
 
 
-				List<DefaultProjectilAI> projectilesList = new List<DefaultProjectilAI>();
+				List<DefaultProjectileAI> projectilesList = new List<DefaultProjectileAI>();
 
-				float projectilecount = 1 + pet.Player.GetPlayerStats.AdditionalProjectile.Value;
+				float projectilecount = 1 + pet.Player.PlayerStats.AdditionalProjectile.Value;
 
 				GameObject[] Destructibles = GameObject.FindGameObjectsWithTag("Destructible");
 
@@ -448,7 +448,7 @@ public class BowAttackBehaviour : IdlePetBehaviour
 					if (TargetList[i] != null)
 					{
 						Vector3 ProjectileDirection = (TargetList[i].transform.position - pet.transform.position).normalized;
-						DefaultProjectilAI poolable = new DefaultProjectilAI();
+                        DefaultProjectileAI poolable = new DefaultProjectileAI();
 						poolable.PoolPrefabAssociated = _weaponProjectile;
 
 						projectilesList.Add(poolable);
@@ -460,20 +460,19 @@ public class BowAttackBehaviour : IdlePetBehaviour
 				for (int i = 0; i < projectilesList.Count; i++)
 				{
 					GameObject projectileGO = projectilesList[i].gameObject;
-					projectileGO.transform.localScale = Vector3.one * pet.Player.GetPlayerStats.ProjectileSize.GetValue();
-					DefaultProjectilAI projectile = projectilesList[i];
+					projectileGO.transform.localScale = Vector3.one * pet.Player.PlayerStats.ProjectileSize.GetValue();
+                    DefaultProjectileAI projectile = projectilesList[i];
 					projectile.Owner = pet.Player;
 					projectile.damageSource = "MiniRog";
 					DamageMultiplierData DamageMultiplier = pet.Player.GetDamageMultiplier;
 					projectile.DamageValue = 2 * DamageMultiplier.DamageMultiplier;
 					projectile.CriticalStack = DamageMultiplier.CriticalStack;
-					projectile.DefencePiercing = pet.Player.GetPlayerStats.DefencePiercing.Value;
-					projectile.Piercing = (int)(2 + pet.Player.GetPlayerStats.ProjectilePiercing.GetValue()) + 1;
-					projectile.Speed = 15 * pet.Player.GetPlayerStats.ProjectileSpeed.GetValue() * (0.75f + UnityEngine.Random.value * 0.25f);
-					projectile.LifeTime = pet.Player.GetPlayerStats.ProjectileLifeTime.GetValue();
-					projectile.knockback = pet.Player.GetPlayerStats.KnockBack.GetValue() * 0.75f;
+					projectile.DefencePiercing = pet.Player.PlayerStats.DefencePiercing.Value;
+					projectile.Piercing = (int)(2 + pet.Player.PlayerStats.ProjectilePiercing.GetValue()) + 1;
+					projectile.Speed = 15 * pet.Player.PlayerStats.ProjectileSpeed.GetValue() * (0.75f + UnityEngine.Random.value * 0.25f);
+					projectile.LifeTime = pet.Player.PlayerStats.ProjectileLifeTime.GetValue();
+					projectile.knockback = pet.Player.PlayerStats.KnockBack.GetValue() * 0.75f;
 
-					projectile.modifierLevel = pet.Player.ClonePlayerModifier;
 					projectile.Awake();
 				}
 			}

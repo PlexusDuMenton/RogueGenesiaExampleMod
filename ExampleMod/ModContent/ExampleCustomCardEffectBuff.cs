@@ -33,8 +33,7 @@ public class ExampleCustomCardEffectBuff : Buff
     {
         if ((PlayerEntity)_entity)
         {
-            ((PlayerEntity)_entity).GetPlayerStats.AttackCoolDown.SetDynamicMultiplyValue("ExampleCustomBuff", Mathf.Pow(SpeedBuff, Mathf.Min(AttackSpeedStackCap, _buffLevel)));
-            ((PlayerEntity)_entity).GetPlayerStats.AttackDelay.SetDynamicMultiplyValue("ExampleCustomBuff", Mathf.Pow(SpeedBuff,Mathf.Min(AttackSpeedStackCap, _buffLevel)));
+            ((PlayerEntity)_entity).PlayerStats.AttackCoolDown.SetDynamicMultiplyValue("ExampleCustomBuff", Mathf.Pow(SpeedBuff, Mathf.Min(AttackSpeedStackCap, _buffLevel)));
         }
     }
 

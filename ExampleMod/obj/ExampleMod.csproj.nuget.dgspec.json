@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "Q:\\RogueGenesiaExampleMod\\ExampleMod\\ExampleMod.csproj": {}
+    "C:\\Users\\PLEXUS\\Documents\\Rogue Genesia\\ModSource\\Example\\ExampleMod\\ExampleMod.csproj": {}
   },
   "projects": {
-    "Q:\\RogueGenesiaExampleMod\\ExampleMod\\ExampleMod.csproj": {
+    "C:\\Users\\PLEXUS\\Documents\\Rogue Genesia\\ModSource\\Example\\ExampleMod\\ExampleMod.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Q:\\RogueGenesiaExampleMod\\ExampleMod\\ExampleMod.csproj",
+        "projectUniqueName": "C:\\Users\\PLEXUS\\Documents\\Rogue Genesia\\ModSource\\Example\\ExampleMod\\ExampleMod.csproj",
         "projectName": "ExampleMod",
-        "projectPath": "Q:\\RogueGenesiaExampleMod\\ExampleMod\\ExampleMod.csproj",
+        "projectPath": "C:\\Users\\PLEXUS\\Documents\\Rogue Genesia\\ModSource\\Example\\ExampleMod\\ExampleMod.csproj",
         "packagesPath": "C:\\Users\\PLEXUS\\.nuget\\packages\\",
-        "outputPath": "Q:\\RogueGenesiaExampleMod\\ExampleMod\\obj\\",
+        "outputPath": "C:\\Users\\PLEXUS\\Documents\\Rogue Genesia\\ModSource\\Example\\ExampleMod\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -37,6 +37,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -48,7 +53,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -57,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303\\RuntimeIdentifierGraph.json"
         }
       }
     }

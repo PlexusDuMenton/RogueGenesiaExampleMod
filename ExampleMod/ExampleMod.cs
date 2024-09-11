@@ -41,6 +41,10 @@ public class ExampleMod : RogueGenesiaMod
         AddCustomAvatar();
 
         AddCustomPet();
+
+        RegisterModdedChallenge();
+        RegisterCustomModdedChallenge();
+
     }
 
 
@@ -53,10 +57,10 @@ public class ExampleMod : RogueGenesiaMod
         LocalizationData englishLocTooltip = new LocalizationData() { Key = "en", Value = "This does nothing" };
         LocalizationDataList localizationTooltip = new LocalizationDataList("Example Slider") { localization = new List<LocalizationData>() { englishLocTooltip } };
 
-        GameOptionData scaleSlider = ModOption.MakeSliderDisplayValueOption("projectile_scale", localization, 0f, 100f, 50f, 100, true, localizationTooltip);
+        GameOptionData scaleSlider = ModOption.MakeSliderDisplayValueOption("projectile_scale",localization, 0f, 100f, 50f, 100, true, localizationTooltip);
         var sliderobj = ModOption.AddModOption(scaleSlider, "Accessibility Options", "Example Mod");
 
-
+        
     }
 
     //This function is called when the game is finishing loading all the mods and the vanilla content
@@ -118,7 +122,7 @@ public class ExampleMod : RogueGenesiaMod
         };
 
 
-
+        
 
         LocalizationDataList name = new LocalizationDataList();
 
@@ -127,13 +131,9 @@ public class ExampleMod : RogueGenesiaMod
 
 
         LocalizationDataList description = new LocalizationDataList();
-        description.localization.Add(new LocalizationData()
-        {
-            Key = "en",
-            Value = "The Serial killer count his victim, for each kill you receive one charge."
-
-            + "\nYou can press the attack button to use your charges, 10 charges are used, you trigger one attack for each of your weapon"
-        });
+        description.localization.Add(new LocalizationData() { Key = "en", Value = "The Serial killer count his victim, for each kill you receive one charge."
+            
+            +"\nYou can press the attack button to use your charges, 10 charges are used, you trigger one attack for each of your weapon" });
 
 
         AvatarSkinSO defaultAvatarSkin = AvatarAPI.AddAvatarSkin("Default_SerialKiller", avatarAnimations, "SerialKiller", name, description);
@@ -168,6 +168,61 @@ public class ExampleMod : RogueGenesiaMod
         PetScriptableObject pet = PetAPI.AddCustomPet("MiniRog", typeof(ExamplePetData), petAnimation, ERequiredPetDLC.Dog);
         pet.Unlocked = true;
         pet.PetScale = new Vector2(1, 1);
+    }
+
+
+    void RegisterModdedChallenge()
+    {
+
+        ChallengeModifier challengeModifier = new ChallengeModifier();
+        //We reduce health regen by 95% in this challenge
+        challengeModifier.StatsModifier = new StatsModifier();
+        challengeModifier.StatsModifier.ModifiersList.Add(
+            new StatModifier
+            {
+                Key = "HealthRegen",
+                Value = new SingularModifier() { Value = 0.05f }
+            });
+
+
+        var localizedName = new List<LocalizationData>
+            {
+                new LocalizationData { Key = "en", Value = "Example Modded Challenge" }
+            };
+
+        //We use the "AddCustomChallengeWithoutRefresh()" instead of "AddCustomChallenge()" function as it greatly reduce the CPU usage.
+        var moddedChallenge = ChallengeAPI.AddCustomChallengeWithoutRefresh("ExampleModdedChallenge", 0, (int)EDifficulty.D, 2, challengeModifier, false, localizedName);
+
+        moddedChallenge.AllowStacking = true;
+        moddedChallenge.CanLevelUp = true;
+        moddedChallenge.HardMode = false;
+        moddedChallenge.LevelIncreaseType = ChallengeSO.ChallengeLevelingType.StatAndRankIncrease;
+
+    }
+
+    void RegisterCustomModdedChallenge()
+    {
+        // we first register our custom class ExampleModdedChallengeModifier that is created inside ExampleModdedChallengeModifier.cs
+        ChallengeAPI.RegisterCustomChallengeModifier("ExampleModdedCustomChallenge", typeof(ExampleModdedChallengeModifier).GetConstructor(Type.EmptyTypes));
+
+        ChallengeModifier challengeModifier = new ChallengeModifier();
+
+        challengeModifier.CustomChallengeModifiersList.Add("ExampleModdedCustomChallenge");
+
+        challengeModifier.GlobalStatsMultiplier = 0.75f;
+
+        var localizedName = new List<LocalizationData>
+            {
+                new LocalizationData { Key = "en", Value = "Custom Modded Challenge" }
+            };
+
+        // we use the "AddCustomChallengeWithoutRefresh()" instead of "AddCustomChallenge()" function as it greatly reduce the CPU usage 
+        var CustomModdedChallenge = ChallengeAPI.AddCustomChallengeWithoutRefresh("ExampleModdedCustomChallenge", 0, (int)EDifficulty.D, 2, challengeModifier, false, localizedName);
+
+        CustomModdedChallenge.AllowStacking = true;
+        CustomModdedChallenge.CanLevelUp = true;
+        CustomModdedChallenge.HardMode = false;
+        CustomModdedChallenge.LevelIncreaseType = ChallengeSO.ChallengeLevelingType.StatAndRankIncrease;
     }
 
 }

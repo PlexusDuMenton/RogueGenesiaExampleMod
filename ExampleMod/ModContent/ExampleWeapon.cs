@@ -15,12 +15,12 @@ public class ExampleWeapon : Weapon
     public ExampleWeapon()
     {
         ShotSound = Resources.Load<AudioClip>("SFX/Gameplay/Throw_Sound");
-        ComboCount = 1;
-        Projectile = 1;
-        DelayBetweenCombo = 1.0f;
-        DelayBetweenAttack = 0.1f;
-        Damage = 20;
-        Piercing = 6;
+        WeaponStats.ComboCount.SetDefaultBaseStat(1);
+        WeaponStats.ProjectileCount.SetDefaultBaseStat(1);
+        WeaponStats.DelayBetweenCombo.SetDefaultBaseStat(1.0f);
+        WeaponStats.DelayBetweenAttack.SetDefaultBaseStat(0.1f);
+        WeaponStats.Damage.SetDefaultBaseStat(20);
+        WeaponStats.ProjectilePiercing.SetDefaultBaseStat(6);
         DamageSource = "ExampleWeaponDamageSource";
         _weaponProjectile = Resources.Load<GameObject>("WeaponProjectiles/BoltProjectile");
     }
@@ -29,7 +29,7 @@ public class ExampleWeapon : Weapon
         if (EnemyManager.GetEnemiesCount > 0)
         {
 
-            List<DefaultProjectilAI> projectileList = GetHealthyTargeting(GameData.GetConstructor(typeof(DefaultProjectilAI)), Owner);
+            List<DefaultProjectileAI> projectileList = GetHealthyTargeting(GameData.GetConstructor(typeof(DefaultProjectileAI)), Owner);
 
 
             if (projectileList.Count > 0)
@@ -42,26 +42,29 @@ public class ExampleWeapon : Weapon
             for (int i = 0; i < projectileList.Count; i++)
             {
                 GameObject projectileGO = projectileList[i].gameObject;
-                projectileGO.transform.localScale = Vector3.one * Owner.GetPlayerStats.ProjectileSize.GetValue();
-                DefaultProjectilAI projectile = projectileList[i];
+                projectileGO.transform.localScale = Vector3.one * Owner.PlayerStats.ProjectileSize.GetValue();
+                DefaultProjectileAI projectile = projectileList[i];
                 projectile.Owner = Owner;
                 projectile.damageSource = DamageSource;
-                projectile.DefencePiercing = Owner.GetPlayerStats.DefencePiercing.Value;
+                projectile.DefencePiercing = Owner.PlayerStats.DefencePiercing.Value;
                 DamageMultiplierData DamageMultiplier = Owner.GetDamageMultiplier;
                 projectile.DamageValue = Damage * DamageMultiplier.DamageMultiplier;
                 projectile.CriticalStack = DamageMultiplier.CriticalStack;
-                projectile.Piercing = (int)(Piercing + Owner.GetPlayerStats.ProjectilePiercing.GetValue()) + 1;
-                projectile.Speed = 25 * Owner.GetPlayerStats.ProjectileSpeed.GetValue() * (0.75f + UnityEngine.Random.value * 0.25f); ;
-                projectile.LifeTime = Owner.GetPlayerStats.ProjectileLifeTime.GetValue();
-                projectile.knockback = Owner.GetPlayerStats.KnockBack.GetValue() * 0.75f;
-                projectile.modifierLevel = Owner.ClonePlayerModifier;
+                projectile.Piercing = (int)(Piercing + Owner.PlayerStats.ProjectilePiercing.GetValue()) + 1;
+                projectile.Speed = 25 * Owner.PlayerStats.ProjectileSpeed.GetValue() * (0.75f + UnityEngine.Random.value * 0.25f); ;
+                projectile.LifeTime = Owner.PlayerStats.ProjectileLifeTime.GetValue();
+                projectile.knockback = Owner.PlayerStats.KnockBack.GetValue() * 0.75f;
+                foreach(var modifier in WeaponModifiers)
+                {
+                    modifier.AttachToProjectile(projectile, this);
+                }
                 projectile.Awake();
             }
         }
 
     }
 
-    public void OnEnemyHit(IEntity entityHitted, DefaultProjectilAI projectile, DamageInformation damageInformation)
+    public void OnEnemyHit(IEntity entityHitted, DefaultProjectileAI projectile, DamageInformation damageInformation)
     {
         Monster monster = entityHitted as Monster;
 
@@ -78,7 +81,7 @@ public class ExampleWeapon : Weapon
             BonusDamage = monster.CurrentHealth * (0.01f + 0.001f * _level);
         }
 
-        bool killed = entityHitted.TakeDamage(new DamageInformationRef(projectile.Owner, BonusDamage, 0, 0.1f,0, 0, new Vector2(direction.x, direction.z), DamageSource));
+        bool killed = entityHitted.TakeDamage(new DamageInformationRef(projectile.Owner, BonusDamage, 0, 0.1f,0, 0, new Vector2(direction.x, direction.z), DamageSource, this));
 
 
         //reduce monster health by 5% +0.5% per level
@@ -100,59 +103,59 @@ public class ExampleWeapon : Weapon
     public override void LevelUp()
     {
         base.LevelUp();
-        Damage += 2f;
+        WeaponStats.Damage.AddBaseStat(2f);
 
         if (_level >= 3)
         {
-            Projectile = 2;
+            WeaponStats.ProjectileCount.SetDefaultBaseStat(2);
         }
         if (_level >= 5)
         {
-            Projectile = 3;
+            WeaponStats.ProjectileCount.SetDefaultBaseStat(3);
         }
         if (_level == 8)
         {
-            Damage += 2f;
-            Projectile = 4;
+            WeaponStats.Damage.AddBaseStat(2f);
+            WeaponStats.ProjectileCount.SetDefaultBaseStat( 4);
         }
         if (_level == 9)
         {
-            Damage += 2f;
-            Projectile = 5;
-            ComboCount = 2;
+            WeaponStats.Damage.AddBaseStat(2f);
+            WeaponStats.ProjectileCount.SetDefaultBaseStat(5);
+            WeaponStats.ComboCount.SetDefaultBaseStat(2);
         }
 
         switch (_level)
         {
             case 1:
-                DelayBetweenCombo = 1.0f;
+                WeaponStats.DelayBetweenCombo.SetDefaultBaseStat(1.0f);
                 break;
             case 2:
-                DelayBetweenCombo = .9f;
+                WeaponStats.DelayBetweenCombo.SetDefaultBaseStat(.9f);
                 break;
             case 3:
-                DelayBetweenCombo = .8f;
+                WeaponStats.DelayBetweenCombo.SetDefaultBaseStat(.8f);
                 break;
             case 4:
-                DelayBetweenCombo = .7f;
+                WeaponStats.DelayBetweenCombo.SetDefaultBaseStat(.7f);
                 break;
             case 5:
-                DelayBetweenCombo = .6f;
+                WeaponStats.DelayBetweenCombo.SetDefaultBaseStat(.6f);
                 break;
             case 6:
-                DelayBetweenCombo = .5f;
+                WeaponStats.DelayBetweenCombo.SetDefaultBaseStat(.5f);
                 break;
             case 7:
-                DelayBetweenCombo = .45f;
+                WeaponStats.DelayBetweenCombo.SetDefaultBaseStat(.45f);
                 break;
             case 8:
-                DelayBetweenCombo = .4f;
+                WeaponStats.DelayBetweenCombo.SetDefaultBaseStat(.4f);
                 break;
             case 9:
-                DelayBetweenCombo = .3f;
+                WeaponStats.DelayBetweenCombo.SetDefaultBaseStat(.3f);
                 break;
         }
 
-        Piercing += 6;
+        WeaponStats.ProjectilePiercing.AddBaseStat(6);
     }
 }

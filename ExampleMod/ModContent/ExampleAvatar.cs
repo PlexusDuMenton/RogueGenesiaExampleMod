@@ -31,7 +31,7 @@ public class ExampleAvatarData : AvatarData
             {
                 for (int i = 0; i < _weapon.Count; i++)
                 {
-                    OnAttack(playerEntity, new AttackInformation(_weapon[i].GetComboCount - _weapon[i].AttackComboLeft, _weapon[i].GetComboCount), i);
+                    OnAttack(playerEntity, new AttackInformation(_weapon[i].AttackComboDone, _weapon[i].GetComboCount), i);
                 }
             }
             GameData.SetCustomValue("SerialKillerKill", SerialKillerValue);
